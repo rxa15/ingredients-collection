@@ -1,4 +1,4 @@
-Link aplikasi Adaptable yang telah di-deploy: (nanti diisi)
+Link aplikasi Adaptable yang telah di-deploy: https://ingredients-collection-app.adaptable.app/main/
 
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
 Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Home, yang merupakan sebuah *game* simulasi.
