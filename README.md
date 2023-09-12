@@ -124,7 +124,38 @@ Saya mengizinkan akses agar semua *host* dapat mengakses tautan aplikasi `main` 
 ```
 ALLOWED_HOSTS = ["*"]
 ```
-### Step 2: Mengonfigurasi Routing URL pada aplikasi `main`
+### Step 2: Mengonfigurasi *Routing* URL pada Aplikasi `main`
+Rute URL untuk aplikasi `main` akan diatur oleh sebuah *file* yang bernama `urls.py` yang terletak di dalam *folder* `main`. *File* tersebut akan diisi dengan serangkaian kode yang bertugas untuk mendefinisikan pola URL, mengatur tampilan yang akan ditampilkan ketika URL diakses, serta memberikan nama unik pada pola URL dalam aplikasi.
+```
+from django.urls import path
+from main.views import show_main
 
+app_name = 'main'
+
+urlpatterns = [
+    path('', show_main, name='show_main'),
+]
+```
+### Step 3: Mengonfigurasi *Routing* URL pada Proyek `ingredients_collection` dan Menghubungkannya dengan Aplikasi `main`
+Rute URL untuk proyek `ingredients_collection` diatur oleh sebuah file yang bernama `urls.py` yang terletak di dalam *folder* proyek `ingredients_collection`. *File* tersebut akan diisi dengan serangkaian kode yang bertugas untuk mengimpor rute URL dari `main` ke proyek dan mengarahkan URL ke rute yang telah didefinisikan di `main`.
+```
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('main/', include('main.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+### Step 4: Menjalankan Proyek Django 
+Jalankan proyek Django dengan *command* berikut:
+```
+python manage.py runserver
+```
+dan buka tautan http://127.0.0.1:8000/ untuk melihat halaman aplikasi yang telah dibuat.  
 ## Checklist 7: Melakukan *Deployment* ke Adaptable terhadap Aplikasi yang Sudah Dibuat
-## Checklist 8: Membuat Sebuah `README.md` 
+Saya membuat sebuah *public repository* di GitHub bernama `ingredients_collection` untuk proyek aplikasi ini. Lalu, saya menghubungkan *repository* tersebut dengan Adaptable.io. Saya menggunakan `Python App Template` sebagai *template deployment* karena aplikasi `main` saya kembangkan menggunakan bahasa pemograman Python. Selain itu, saya menggunakan `PostgreSQL` sebagai tipe *database* yang digunakan. Selanjutnya, saya memasukkan perintah 
+```
+python manage.py migrate && gunicorn ingredients_collection.wsgi
+```
+pada bagian `Start Command`. Kemudian, saya memasukkan nama aplikasi yaitu `ingredients-collection-app` lalu mencentang bagian `HTTP Listener on PORT` dan memulai proses *deployment*.
