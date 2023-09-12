@@ -10,6 +10,8 @@ Bahan makanan yang dibutuhkan pun harus ditanam serta dipanen terlebih dahulu di
 Proses ini tentunya akan memakan banyak waktu, terlebih (TODO)
 
 # Penjelasan Implementasi Checklist
-## Membuat Sebuah Proyek Django Baru
-Sebelum membuat sebuah proyek Django untuk aplikasi saya, saya membuat sebuah direktori baru bernama `ingredients_list` yang nantinya akan menjadi direktori utama pembuatan aplikasinya.
-Setelah itu, saya mengaktifkan *virtual environment* di perangkat saya agar (TODO)
+## 1. Membuat Direktori Utama Proyek dan Mengaktifkan *Virtual Environment*
+Sebelum membuat sebuah proyek Django untuk aplikasi saya, saya membuat sebuah direktori baru bernama `ingredients_collection` yang menjadi direktori utama pembuatan aplikasinya.
+Setelah itu, saya mengaktifkan *virtual environment* di perangkat saya dengan *command*: `python -m venv env` dan `source env/bin/activate`.
+## 2. Melakukan *Setup Library* yang Dibutuhkan
+Selanjutnya, saya membuat sebuah *file* bernama `requirements.txt` yang berisi *dependencies* (kumpulan 
