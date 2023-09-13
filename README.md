@@ -5,9 +5,7 @@ Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Hom
 Pada awal permainan, pengguna akan diminta untuk memilih seorang pasangan dan menempati sebuah rumah virtual dengan seekor kucing.
 Selama permainan, pengguna akan mengelola rumah virtual tersebut bersama pasangannya.
 Terdapat berbagai kegiatan yang dapat dilakukan pengguna selama bermain, salah satunya adalah memasak.
-Akan tetapi, pengguna harus mencukupi banyak bahan makanan yang dibutuhkan agar dapat memasak suatu makanan. 
-Bahan makanan yang dibutuhkan pun harus ditanam serta dipanen terlebih dahulu di kebun rumah virtual.
-Proses ini tentunya akan memakan banyak waktu, terlebih (TODO)
+Aplikasi ini bertujuan untuk menyimpan banyak bahan makanan yang akan dibutuhkan untuk memasak serta membaginya menjadi beberapa kategori, seperti `fruits`, `meat`, dan `vegetables`.
 
 # Penjelasan Implementasi Checklist
 ## Checklist 1 : Membuat Sebuah Proyek Django
