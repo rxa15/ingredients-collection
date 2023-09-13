@@ -160,7 +160,7 @@ python manage.py migrate && gunicorn ingredients_collection.wsgi
 ```
 pada bagian `Start Command`. Kemudian, saya memasukkan nama aplikasi yaitu `ingredients-collection-app` lalu mencentang bagian `HTTP Listener on PORT` dan memulai proses *deployment*.
 # Bagan *Request Client* ke Web Aplikasi Berbasis Django
-(TODO)
+![Bagan Request Client ke Web Aplikasi Berbasis Django](IMG_3574690BDFBD-1.jpeg)
 * *Client* mengirimkan HTTP *request* pada Internet/*web browser* yang kemudian akan diteruskan ke Django.
 * Django akan mencari pola URL yang bersesuaian dengan HTTP *request* yang diminta *client* pada `urls.py`.
 * Setelah ditemukan, Django akan memanggil fungsi pada `views.py` yang bersesuaian dengan pola URL yang diminta.
