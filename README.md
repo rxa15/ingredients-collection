@@ -1,4 +1,4 @@
-[Link Adaptable](https://ingredients-collection-app.adaptable.app/main/)
+[Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
 
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
 Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Home, yang merupakan sebuah *game* simulasi.
