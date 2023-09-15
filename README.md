@@ -1,5 +1,5 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
-
+# Tugas 2 PBP
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
 Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Home, yang merupakan sebuah *game* simulasi.
 Pada awal permainan, pengguna akan diminta untuk memilih seorang pasangan dan menempati sebuah rumah virtual dengan seekor kucing.
@@ -188,3 +188,13 @@ Kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual
 ## Perbedaan MVC, MVT, dan MVVM
 * Perbedaan ketiga konsep desain tersebut terletak pada jembatan penghubung antar komponen-komponennya. Pada MVC, `Controller` berperan sebagai penghubung `Model` dan `View`, sedangkan `Template` pada MVT dan `Viewmodel` pada MVVM menjadi "Controller"-nya.
 * Selain itu, pada MVC dan MVT `Model` dan `View` terhubung secara langsung. Namun, pada MVVM mereka harus melalui `Viewmodel` karena `Model` dan `View`nya tidak terhubung secara langsung.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Tugas 3 PBP
+# Penjelasan Implementasi Checklist
+## Checklist 1: Membuat Input `form` 
+## Checklist 2: Menambahkan Lima Fungsi `views`
+## Checklist 3: Membuat *Routing* URL untuk Masing-Masing `views`
+# Perbedaan antara Form `POST` DAN `GET` dalam Django
+# Perbedaan utama antara XML, JSON, dan HTML dalam Konteks Pengiriman Data
+# Mengapa JSON Sering Digunakan dalam Pertukaran Data antara Aplikasi Web Modern?
+# *Screenshot* Akses URL menggunakan Postman
