@@ -1,7 +1,20 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
 # Tugas 4 PBP
 # Django `UserCreationForm` serta Kelebihan dan Kekurangannya
+* Django memiliki sebuah * build-in user-authentication system*, yaitu sebuah sistem yang dapat melakukan verifikasi terhadap identitas pengguna sehingga pengguna yang terverifikasi akan mendapatkan akses untuk menjalankan suatu kegiatan tertentu yang diperbolehkan di sistem tersebut. *User-authentication system* pada Django mengatur hal-hal yang berkaitan dengan *user accounts* (akun pengguna), *groups* (memberikan izin untuk lebih dari satu pengguna), *permissions* (memberikan akses kepada pengguna terkait kegiatan apa saja yang diperbolehkan), dan *cookie-based user sessions* (menggunakan *cookies* untuk mengenali *session* yang unik pada suatu web tertentu). Salah satu *modules* Django yang berkaitan dengan sistem tersebut adalah `UserCreationForm`.
+* Modul `UserCreationForm` digunakan untuk membuat sebuah *user* baru di aplikasi web kita. Ketika *user* melakukan registrasi akun baru di aplikasi web kita, `UserCreationForm` mengatur atribut `username`, `password1`, dan `password2` (untuk konfirmasi password1). Tampilan *form* aplikasi web kita akan berbentuk seperti ini:
+![Django UserCreationForm](https://static.javatpoint.com/django/images/django-usercreationform.png)
+* Kelebihan modul `UserCreationForm` adalah (TODO)
+* Kekurangan modul `UserCreationForm` adalah (TODO)
 # Perbedaan antara Autentikasi dan Otorisasi dalam Konteks Django dan Mengapa Keduanya Penting?
+(TODO)
+# *Cookies* dalam Aplikasi Web dan Penggunaannya oleh Django untuk Mengelola Data Sesi Pengguna
+(TODO)
+# Keamanan Penggunaan *Cookies* dalam Pengembangan Aplikasi
+(TODO)
+# Penjelasan Implementasi Checklist 
+(TODO)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 3 PBP
 # Penjelasan Implementasi Checklist
@@ -142,6 +155,7 @@ JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena fo
 ![Screenshot Hasil Akses XML by ID 1](xml_by_id_Laras.jpeg)
 ### JSON by ID
 ![Screenshot Hasil Akses JSON by ID 5](json_by_id_Laras.jpeg)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 2 PBP
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
