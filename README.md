@@ -2,21 +2,134 @@
 # Tugas 3 PBP
 # Penjelasan Implementasi Checklist
 ## Checklist 1: Membuat Input `form` 
+### Membuat Direktori untuk *Template* Dasar dari Form
+Sebelum membuat `form`, saya membuat sebuah direktori baru untuk membuat *template* dasar untuk pembuatan `form`, yaitu sebuah berkas HTML bernama `base.hmtl`. Berkas HTML tersebut berperan sebagai dasar dari pembuatan proyek aplikasi web saya. 
+### Membuat Input `Form`
+`Form` yang saya buat untuk aplikasi saya bertujuan agar *user* dapat menyimpan data bahan makanan yang dimiliki oleh *suer* pada *game* Adorable Home. Berikut adalah struktur kode untuk `form` yang saya buat:
+```
+from django.forms import ModelForm
+from main.models import Item # mengimport model bernama Item yang akan digunakan untuk form
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Item
+        fields = ["name", "category", "amount", "description"]
+```
+* Isi dari variabel `fields` disesuaikan dengan atribut yang ada pada model
+### Melakukan Render HTML dengan Metode `POST`
+Kemudian saya melakukan *render form* dengan membuat berkas HTML baru bernama `create_product.html`. Berikut adalah isi dari berkas HTML tersebut:
+```
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Ingredients</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Ingredient"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+Berkas HTML ini memiliki beberapa komponen sebagai berikut:
+* <form method="POST"> menandakan metode yang digunakan untuk `form` ini adalah `POST`
+* {% csrf_token %} menandakan token yang akan di-*generate* oleh Django sebagai proteksi (*security*)
+### Mengatur *Button*
+Kemudian, saya menambahkan beberapa kode di *file* `main.html` untuk menampilkan data bahan makanan dalam bentuk tabel. Saya juga menambahkan kode untuk membuat tombol `Add New Ingredient` yang akan mengarahkan saya ke `form` ketika saya memencet tombol tersebut.
+```
+<table>
+    <tr>
+        <th>New Ingredients</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for item in item %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.description}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+    <button>
+        Add New Ingredient
+    </button>
+</a>
+
+{% endblock content %}
+```
 ## Checklist 2: Menambahkan Lima Fungsi `views`
+Selanjutnya, saya membuat fungsi `views` yang akan mengembalikan data yang di-*input* pada *form* menjadi bentuk HTTML, XML, JSON, XML by ID, dan JSON by ID. Fungsi untuk bentuk HTML adalah fungsi `create_product`, yaitu sebagai berikut:
+```
+def create_product(request):
+    '''Fungsi untuk mengembalikan data dalam bentuk HTML'''
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:create_product'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+Fungsi sisanya saya buat menggunakan *build-in* Django yang bernama *serializer*. *Serializer* mengembalikan HTTP *response* dalam format yang kita tentukan, baik dalam XML maupun JSON. Berikut adalah fungsi yang saya buat:
+```
+def show_xml(request):
+    '''Fungsi untuk mengembalikan data dalam bentuk XML'''
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    '''Fungsi untuk mengembalikan data dalam bentuk JSON'''
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    '''Fungsi untuk mengembalikan data dalam bentuk XML by ID'''
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    '''Fungsi untuk mengembalikan data dalam bentuk JSON by ID'''
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
 ## Checklist 3: Membuat *Routing* URL untuk Masing-Masing `views`
+*Routing* URL untuk masing-masing `views` diatur dalam berkas `urls.py` di *folder* `main`. 
+```
+path('create_product',create_product,name= 'create_product'),
+path('xml/', show_xml, name='show_xml'),
+path('json/', show_json, name='show_json'),
+path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
+```
+Kelima *path* URL tersebut mengatur rute, fungsi, dan nama dari URL yang dapat diakses *user* ketika ingin mengembalikan data dalam format tertentu. Misalnya ketika saya ingin mengembalikan data *input* dalam bentuk JSON, saya dapat mengakses URL `http://127.0.0.1:8000/json`
 # Perbedaan antara Form `POST` dan `GET` dalam Django
 * *Method* `POST` pada form Django digunakan untuk menambahkan data ke *server*. Ketika *client* men-*submit* data ke suatu server, proses tersebut menggunakan *method* `POST`.
 * *Method* `GET` pada form Django digunakan untuk mendapatkan data dari *server*. *Method* ini merupakan *default method* yang digunakan ketika kita membuat *form* di Django. *Client* mengirimkan HTTP *request* ke suatu *server* lalu *server* tersebut akan mengirimkan HTTP *response* berupa HTML atau *web page*. Di saat yang bersamaan, *client* juga akan mengirimkan (*passing*) data ke *server* tersebut, contohnya adalah men-*submit* data di *form*. Kemudian, *server* tersebut akan mengumpulkan data yang telah di-*submit* menjadi kumpulan *string* lalu digabungkan menjadi suatu URL (yang menyimpan *key* dan *value* dari data yang di-*submit*) dan menjadi HTTP *response*.
 * Perbedaan antara kedua *methods* untuk form tersebut terletak pada URL di *address bar* yang ditampilkan oleh *server* ketika *client* selesai mengisi *form*. Pada *server* yang menggunakan *method* `GET`, data yang di-*pass* oleh *client* akan muncul di URL. Contohnya adalah sebagai berikut: Laras, seorang *client*, mengisi sebuah *form* tentang data dirinya, yaitu `nama lengkap`, `NPM`, serta `nama angkatan`. Setelah mengisi *form*, URL di *address bar* pada *browser* yang Laras gunakan untuk *form* tersebut akan berbentuk seperti ini: `http://form_yang_diisi_laras/submit?nama=TengkuLarasMalahayati&NPM=2206081641&namaangkatan=Apollo`. Kita dapat melihat bahwa data pribadi Laras tertera pada URL. Oleh karena itu, *method* `GET` kurang cocok untuk digunakan pada *form* yang mengharuskan *client* untuk mengirimkan data pribadi, seperti nomor telepon, *username*, *password*, alamat rumah, dan lain-lain.
 * Sebaliknya pada *form* yang menggunakan *method* `POST`, tampilan URL di *address bar* Laras adalah: `http://form_yang_diisi_laras/submit`. Data pribadi Laras tidak tertera pada URL. Akan tetapi, URL-nya menjadi kurang cocok untuk di-*bookmark* karena URL-nya tidak memiliki informasi detail yang membedakannya dengan URL dari *client* lain yang juga men-*submit form* tersebut.
 # Perbedaan utama antara XML, JSON, dan HTML dalam Konteks Pengiriman Data
-Perbedaan utama antara XML, JSON, dan HTML dalam pengiriman data terletak pada struktur data yang dikirim. Berikut adalah penjelasannya:
-* XML (eXtensible Markup Language) adalah sebuah *markup language* yang berfungsi untuk menyimpan dan mengirim data. Data disusun dalam struktur *tree* (pohon) secara berlapis-lapis (ber-*layer*). XML juga menggunakan *tag* yang dapat *programmer* tentukan sendiri untuk setiap elemen datanya. Penggunaan *tag* pada XML membuat data yang dikirim selama pengiriman data menjadi lebih kompleks.
-* JSON (Javascript Object Nation) adalah sebuah  
+Perbedaan utama antara XML, JSON, dan HTML dalam pengiriman data terletak pada struktur data yang dikirim, terutama pada XML. Data pada XML disusun dalam struktur *tree* (pohon) secara berlapis-lapis (ber-*layer*). XML juga menggunakan *tag* yang dapat *programmer* tentukan sendiri untuk setiap elemen datanya. Penggunaan *tag* pada XML membuat data yang dikirim selama pengiriman data menjadi lebih kompleks. Pada JSON, data yang dikirim berbentuk JavaScript *object* yang memiliki struktur *key-value pairs* seperti *dictionary*, sehingga datanya lebih mudah untuk dibaca. Sementara itu, HTML memiliki struktur data yang mirip dengan XML, tetapi *tag* yang digunakan tidak bisa dibuat sendiri karena harus mengikuti aturan dari HTML. 
 # Mengapa JSON Sering Digunakan dalam Pertukaran Data antara Aplikasi Web Modern?
-JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena format pengiriman data ini bersifat universal (dapat digunakan di bahasa pemograman apapun). Selain itu, struktur datanya yang berupa *key*-*value pairs* (seperti *dictionary*) membuatnya dapat dibaca oleh mesin (*machine readable*) dan manusia (*human readable*), sehingga lebih mudah untuk dipahami ketika kita menerima data dalam bentuk JSON. Selain itu, JSON menggunakan memori yang lebih sedikit dibanding XML sehingga lebih *lightweight* (ringan) ketika digunakan dalam pengiriman data.
+JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena format pengiriman data ini bersifat universal (dapat digunakan di bahasa pemograman apapun). Selain itu, struktur datanya yang berupa *key*-*value pairs* (seperti *dictionary*) membuatnya dapat dibaca oleh mesin (*machine readable*) dan manusia (*human readable*), sehingga lebih mudah untuk dipahami ketika kita menerima data dalam bentuk JSON. Selain itu, JSON menggunakan memori yang lebih sedikit dibanding XML sehingga lebih *lightweight* (ringan) ketika digunakan dalam pengiriman data. Berbagai kelebihan JSON inilah yang menjadikannya sering digunakan dalam pertukaran data antara aplikasi modern.
 # *Screenshot* Hasil Akses URL menggunakan Postman
 ### HTML
+![Screenshot Hasil Akses HTML](html_Laras.jpeg)
 ### XML
 ![Screenshot Hasil Akses XML](xml_Laras.jpeg)
 ### JSON
