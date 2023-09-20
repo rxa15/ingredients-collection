@@ -1,3 +1,7 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
 <head>
 <title> Adorable Home's Ingredients Collection Page</title>
 </head>
@@ -8,3 +12,30 @@
 <p>{{nama}}</p> 
 <h5>Kelas: </h5>
 <p>{{kelas}}</p> 
+
+<table>
+    <tr>
+        <th>New Ingredients</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for item in item %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.amount}}</td>
+            <td>{{item.description}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+    <button>
+        Add New Ingredient
+    </button>
+</a>
+
+{% endblock content %}
