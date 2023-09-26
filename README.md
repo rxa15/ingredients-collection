@@ -1,4 +1,6 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
+[Tugas 2]() -> TODO
+[Tugas 3]() -> TODO
 # Tugas 4 PBP
 # Django `UserCreationForm` serta Kelebihan dan Kekurangannya
 * Django memiliki sebuah * build-in user-authentication system*, yaitu sebuah sistem yang dapat melakukan verifikasi terhadap identitas pengguna sehingga pengguna yang terverifikasi akan mendapatkan akses untuk menjalankan suatu kegiatan tertentu yang diperbolehkan di sistem tersebut. *User-authentication system* pada Django mengatur hal-hal yang berkaitan dengan *user accounts* (akun pengguna), *groups* (memberikan izin untuk lebih dari satu pengguna), *permissions* (memberikan akses kepada pengguna terkait kegiatan apa saja yang diperbolehkan), dan *cookie-based user sessions* (menggunakan *cookies* untuk mengenali *session* yang unik pada suatu web tertentu). Salah satu *modules* Django yang berkaitan dengan sistem tersebut adalah `UserCreationForm`.
@@ -7,10 +9,12 @@
 * Kelebihan modul `UserCreationForm` adalah (TODO)
 * Kekurangan modul `UserCreationForm` adalah (TODO)
 # Perbedaan antara Autentikasi dan Otorisasi dalam Konteks Django dan Mengapa Keduanya Penting?
-* Django memiliki sebuah *build-in user-authentication system* yang dapat memverifikasi identitas pengguna (autentikasi) dan menentukan akses kegiatan yang dapat dilakukan suatu pengguna (otorisasi). 
-* Autentikasi dalam Django adalah sebuah proses yang dilakukan oleh Django untuk memverifikasi identitas pengguna
+* Django memiliki sebuah *build-in user-authentication system* yang dapat memverifikasi identitas pengguna (autentikasi) dan menentukan akses kegiatan yang dapat dilakukan suatu pengguna (otorisasi).  (TODO)
+* Autentikasi dalam Django adalah sebuah proses yang dilakukan oleh Django untuk memverifikasi identitas pengguna (TODO)
 # *Cookies* dalam Aplikasi Web dan Penggunaannya oleh Django untuk Mengelola Data Sesi Pengguna
-(TODO)
+* *Cookies* dalam aplikasi web adalah data sementara yang disimpan oleh *server* web ketika *user* mengakses web tersebut. *Cookies* dalam aplikasi web adalah *text data* yang bersifat sementara dan berbentuk *text file* yang dikirimkan oleh suatu *server* web. *Cookies* disimpan dalam *browser* yang digunakan oleh *user* ketika mengakses (mengirimkan *request* ke) web tersebut. Ketika *user* mengakses suatu web, web tersebut akan memberikan *cookies* bersama dengan *session id* dari user. *Cookies* berfungsi untuk menyimpan sesi ketika *user* mengakses suatu web.
+* Cara kerja *cookies* mirip dengan gelang masuk ke taman bermain, misalnya Dufan. Ketika kita memasuki area Dufan, kita diberikan suatu gelang khusus yang memperbolehkan kita bermain wahana-wahana yang ada di sana. Akan tetapi, jika kita meninggalkan area Dufan untuk waktu yang lama, kita harus membeli gelang tersebut lagi agar kita dapat kembali bermain di Dufan. Pada aplikasi web, ketika *user* meninggalkan suatu web dalam waktu yang cukup panjang, *cookies* akan otomatis terhapus dari *browser* milik *user*, jadi ketika *user* ingin mengakses web tersebut kembali, ia harus melakukan *login* terlebih dahulu.
+* Pada Django, *cookies* digunakan untuk (TODO)
 # Keamanan Penggunaan *Cookies* dalam Pengembangan Aplikasi
 (TODO)
 # Penjelasan Implementasi Checklist 
