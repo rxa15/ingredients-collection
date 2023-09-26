@@ -7,7 +7,8 @@
 * Kelebihan modul `UserCreationForm` adalah (TODO)
 * Kekurangan modul `UserCreationForm` adalah (TODO)
 # Perbedaan antara Autentikasi dan Otorisasi dalam Konteks Django dan Mengapa Keduanya Penting?
-(TODO)
+* Django memiliki sebuah *build-in user-authentication system* yang dapat memverifikasi identitas pengguna (autentikasi) dan menentukan akses kegiatan yang dapat dilakukan suatu pengguna (otorisasi). 
+* Autentikasi dalam Django adalah sebuah proses yang dilakukan oleh Django untuk memverifikasi identitas pengguna
 # *Cookies* dalam Aplikasi Web dan Penggunaannya oleh Django untuk Mengelola Data Sesi Pengguna
 (TODO)
 # Keamanan Penggunaan *Cookies* dalam Pengembangan Aplikasi
