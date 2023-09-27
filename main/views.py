@@ -92,3 +92,20 @@ def show_json_by_id(request, id):
     '''Fungsi untuk mengembalikan data dalam bentuk JSON by ID'''
     data = Item.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def increase_item(request, id):
+    item = Item.objects.get(pk=id)
+    item.amount += 1
+    item.save()
+    return HttpResponseRedirect(redirect("/ingredients-collection"))
+
+def decrease_item(request, id):
+    item = Item.objects.get(pk=id)
+    item.amount -= 1
+    item.save()
+    return HttpResponseRedirect(redirect("/ingredients-collection"))
+
+def delete(request, id):
+    item = Item.objects.get(pk=id)
+    item.delete()
+    return HttpResponseRedirect(redirect("/ingredients-collection"))

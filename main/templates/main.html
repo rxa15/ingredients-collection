@@ -20,12 +20,25 @@
 
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
-    {% for item in item %}
+    {% for item in items %}
         <tr>
             <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
             <td>{{item.amount}}</td>
+            <td>
+                <a href="{% url 'main:increase_item' item.id %}">
+                    <button>+</button>
+                </a>
+                <a href="{% url 'main:decrease_item' item.id %}">
+                    <button>-</button>
+                </a>
+            </td>
             <td>{{item.description}}</td>
+            <td>{{item.category}}</td>
+            <td>
+                <a href="{% url 'main:delete' item.id %}" onclick="return confirm('Are you sure?');">
+                    <button>Delete</button>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 </table>
