@@ -29,7 +29,55 @@ Biasanya, ada *user* yang memilih tombol `Accept` dan ada juga yang memilih tomb
    ![This Website is Not Secure](https://www.isitwp.com/wp-content/uploads/2021/08/site-is-not-secure-warning.png)
   3. Situs web yang menggunakan *third-party cookies*.
 # Penjelasan Implementasi Checklist 
-(TODO)
+## Checklist 1: Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar
+Untuk membuat fungsi-fungsi tersebut, saya melakukan *import* beberapa fitur Django sebagai berikut:
+```
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+```
+Kemudian saya membuat fungsi untuk registrasi, login, dan logout dengan nama `register_account(request)`, `login_user(request)`, dan `logout_user(request)`. Saya juga mengatur agar *user* harus melakukan registrasi akun terlebih dahulu sebelum menambahkan bahan makanan di aplikasi web saya.
+## Checklist 2: Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal
+Saya menjalankan program saya di *localhost* lalu kemudian melakukan registrasi pengguna. Saya membuat dua akun pengguna yang bernama `conan.edogawa` dan `akai.shuichi`. Keduanya memiliki dummies data yaitu sebagai berikut:
+
+### Checklist 3: Menghubungkan model Item dengan User
+Saya mengimpor `User` ke dalam `models.py` agar model Item dapat terhubung dengan User. Setelah itu, saya memodifikasi fungsi `show_item` dan `create_item` sebagai berikut:
+```
+def show_item(request):
+    item = Item.objects.filter(user=request.user)
+    context = {
+        'nama': request.user.username,
+        'kelas': 'PBP D',
+        'items': item,
+        'last_login': request.COOKIES['last_login']
+    }
+
+    return render(request, "main.html", context)
+
+def create_item(request):
+    '''Fungsi untuk mengembalikan data dalam bentuk HTML'''
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        product = form.save(commit=False)
+        product.user = request.user
+        product.save()
+        return HttpResponseRedirect(reverse('main:ingredients-collection'))
+    context = {'form': form}
+    return render(request, "create_item.html", context)
+```
+Perubahan ini dilakukan agar pengguna harus melakukan login terlebih dahulu ke aplikasi web lalu web akan menampilkan data pengguna sesuai dengan hasil modifikasi kode yang saya lakukan.
+### Checklist 4: Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi
+Penerapan *cookies* untuk pengguna yang sedang *login* dan penampilan *last logged in* pengguna saya atur dalam 
+```
+<h5>Last time you were logged in: {{ last_login }}</h5>
+```
+di `main.html` dan 
+```
+'last_login': request.COOKIES['last_login']
+```
+pada `views.py`
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 3 PBP
