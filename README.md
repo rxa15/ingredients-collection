@@ -40,7 +40,8 @@ from django.contrib.auth.decorators import login_required
 Kemudian saya membuat fungsi untuk registrasi, login, dan logout dengan nama `register_account(request)`, `login_user(request)`, dan `logout_user(request)`. Saya juga mengatur agar *user* harus melakukan registrasi akun terlebih dahulu sebelum menambahkan bahan makanan di aplikasi web saya.
 ## Checklist 2: Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal
 Saya menjalankan program saya di *localhost* lalu kemudian melakukan registrasi pengguna. Saya membuat dua akun pengguna yang bernama `conan.edogawa` dan `akai.shuichi`. Keduanya memiliki dummies data yaitu sebagai berikut:
-
+![Dummy Data Conan](Conan.png)
+![Dummy Data Akai](Akai.png)
 ### Checklist 3: Menghubungkan model Item dengan User
 Saya mengimpor `User` ke dalam `models.py` agar model Item dapat terhubung dengan User. Setelah itu, saya memodifikasi fungsi `show_item` dan `create_item` sebagai berikut:
 ```
