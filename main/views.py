@@ -1,32 +1,77 @@
-from django.http import HttpResponse
+import datetime
 from django.core import serializers
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages  
 from main.forms import ProductForm
 from django.urls import reverse
 from main.models import Item
 
 from django.shortcuts import render
 
+@login_required(login_url='/login')
+
 def show_item(request):
-    item = Item.objects.all()
+    item = Item.objects.filter(user=request.user)
     context = {
-        'nama': 'Tengku Laras Malahayati',
+        'nama': request.user.username,
         'kelas': 'PBP D',
-        'items': item
+        'items': item,
+        'last_login': request.COOKIES['last_login']
     }
 
     return render(request, "main.html", context)
 
-def create_product(request):
+def create_item(request):
     '''Fungsi untuk mengembalikan data dalam bentuk HTML'''
     form = ProductForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        form.save()
-        return HttpResponseRedirect(reverse('main:create_product'))
-
+        product = form.save(commit=False)
+        product.user = request.user
+        product.save()
+        return HttpResponseRedirect(reverse('main:ingredients-collection'))
     context = {'form': form}
-    return render(request, "create_product.html", context)
+    return render(request, "create_item.html", context)
+
+def register_account(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You've successfully created your account!")
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register_account.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:ingredients-collection")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
 
 def show_xml(request):
     '''Fungsi untuk mengembalikan data dalam bentuk XML'''
