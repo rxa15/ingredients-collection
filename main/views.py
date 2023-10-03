@@ -97,15 +97,15 @@ def increase_item(request, id):
     item = Item.objects.get(pk=id)
     item.amount += 1
     item.save()
-    return HttpResponseRedirect(redirect("/ingredients-collection"))
+    return HttpResponseRedirect(reverse('main:ingredients-collection'))
 
 def decrease_item(request, id):
     item = Item.objects.get(pk=id)
     item.amount -= 1
     item.save()
-    return HttpResponseRedirect(redirect("/ingredients-collection"))
+    return HttpResponseRedirect(reverse('main:ingredients-collection'))
 
 def delete(request, id):
     item = Item.objects.get(pk=id)
     item.delete()
-    return HttpResponseRedirect(redirect("/ingredients-collection"))
+    return HttpResponseRedirect(reverse('main:ingredients-collection'))

@@ -25,23 +25,24 @@
             <td>{{item.name}}</td>
             <td>{{item.amount}}</td>
             <td>
-                <a href="{% url 'main:increase_item' item.id %}">
+                <a href="{% url 'main:increase_item' item.pk %}">
                     <button>+</button>
                 </a>
-                <a href="{% url 'main:decrease_item' item.id %}">
+                <a href="{% url 'main:decrease_item' item.pk %}">
                     <button>-</button>
                 </a>
             </td>
             <td>{{item.description}}</td>
             <td>{{item.category}}</td>
             <td>
-                <a href="{% url 'main:delete' item.id %}" onclick="return confirm('Are you sure?');">
+                <a href="{% url 'main:delete_item' item.pk %}" onclick="return confirm('Are you sure?');">
                     <button>Delete</button>
                 </a>
             </td>
         </tr>
     {% endfor %}
 </table>
+
 
 <br />
 

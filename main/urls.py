@@ -13,7 +13,7 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
-    path('item/<int:id>/increase_item/', increase_item, name='increase_item'),
-    path('item/<int:id>/decrease_item/', decrease_item, name='decrease_item'),
-    path('item/<int:id>/delete/', delete, name='delete'),
+    path('increase/<int:id>', increase_item, name='increase_item'),
+    path('decrease/<int:id>', decrease_item, name='decrease_item'),
+    path('delete/<int:id>', delete, name='delete_item'),
 ]
