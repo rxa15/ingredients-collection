@@ -1,4 +1,42 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
+# Tugas 5 PBP
+# Manfaat dari Setiap HTML *Element Selector* dan Waktu Kegunaannya
+1. **`Element Selector`** (tidak diawali # atau .)
+* *Selector* ini berfungsi untuk memilih elemen HTML berdasarkan *tag*-nya. *Selector* ini dapat kita gunakan ketika kita ingin memilih properti dari elemen-elemen yang memiliki *tag* yang sama. Dengan adanya `element selector`, kita dapat menerapkan sifat-sifat/ciri-ciri yang sama pada semua elemen dengan *tag* yang kita pilih.
+* Format penulisan `element selector` pada CSS adalah: **`[nama_tag]{ ... }`**
+* Contoh penggunaan `element selector` adalah sebagai berikut:
+```
+p{
+  font-size: 20 px;
+  color: #FF0000;
+}
+```
+* *Selector* `p` akan memilih semua elemen teks pada HTML, sehingga semua elemen teks di HTML kita akan berukuran 20 pixel dan berwarna merah.
+
+2. **`Class Selector`** (diawali .)
+* *Selector* ini berfungsi untuk memilih elemen HTML berdasarkan *class*-nya. *Selector* ini dapat kita gunakan ketika kita ingin memilih properti dari elemen-elemen yang termasuk dalam *class* yang sama. Dengan adanya `class selector`, kita dapat menerapkan sifat-sifat/ciri-ciri yang sama pada semua elemen dengan *class* yang kita pilih.
+* Format penulisan `class selector` pada CSS adalah: **`.[nama_class]{ ... }`**
+* Contoh penggunaan `class selector` adalah sebagai berikut:
+```
+.card_design{
+  color: #FF0000;
+  font-size: 20 px;
+}
+```
+* *Selector* `card_design` akan memilih semua elemen pada HTML yang termasuk dalam *class* `card_design`, sehingga semuanya akan berukuran 20 pixel dan berwarna merah.
+3. **`ID Selector`** (diawali #)
+* *Selector* ini berfungsi untuk memilih suatu elemen tertentu di HTML berdasarkan ID-nya. Karena ID HTML bersifat unik untuk setiap elemen, kita dapat menggunakan `ID selector` untuk menerapkan sifat-sifat/ciri-ciri tertentu.
+* Format penulisan `ID selector` pada CSS adalah: **`#[nama_ID]{ ... }`**
+* Contoh penggunaan `ID selector` adalah sebagai berikut:
+```
+#header{
+  background-color: #FFFFFF;
+  text-align: center;
+  color: black;
+}
+```
+* *Selector* `header` akan mengatur elemen yang memiliki ID `header` sehingga *header* di HTML tersebut akan memiliki warna latar belakang putih, *centered text align*, dan warna teks hitam.
+------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 4 PBP
 # Django `UserCreationForm` serta Kelebihan dan Kekurangannya
 * Django memiliki sebuah * build-in user-authentication system*, yaitu sebuah sistem yang dapat melakukan verifikasi terhadap identitas pengguna sehingga pengguna yang terverifikasi akan mendapatkan akses untuk menjalankan suatu kegiatan tertentu yang diperbolehkan di sistem tersebut. *User-authentication system* pada Django mengatur hal-hal yang berkaitan dengan *user accounts* (akun pengguna), *groups* (memberikan izin untuk lebih dari satu pengguna), *permissions* (memberikan akses kepada pengguna terkait kegiatan apa saja yang diperbolehkan), dan *cookie-based user sessions* (menggunakan *cookies* untuk mengenali *session* yang unik pada suatu web tertentu). Salah satu *modules* Django yang berkaitan dengan sistem tersebut adalah `UserCreationForm`.
