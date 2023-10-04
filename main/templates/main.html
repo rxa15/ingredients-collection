@@ -1,63 +1,120 @@
 {% extends 'base.html' %} 
 
 {% block content %}
+    <head>
+        <title>Adorable Home's Ingredients Collection Page</title>
+        <style>
+            body{
+                background-image: url('');
+            }
+            h1 {
+                text-align: center;
+            }
+            .welcome {
+                font-weight: normal;
+            }
+            .class-label {
+                font-weight: bold;
+            }
+            .ingredient-table {
+                width: 100%;
+                border-collapse: collapse; /* Add this for cell spacing */
+            }
 
-<head>
-<title> Adorable Home's Ingredients Collection Page</title>
-</head>
+            .ingredient-table th,
+            .ingredient-table td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid rgb(220, 244, 116); /* Add border for cell separation */
+            }
 
-<h1>Adorable Home's Ingredients Collection Page</h1>
+            .ingredient-table th {
+                background-color: #1ada87d0; /* Add background color to header row */
+            }
+        </style>
+    </head>
+</div>
+<h1>Ingredients Collection</h1>
 
-<h5>Nama: </h5>
-<p>{{nama}}</p> 
-<h5>Kelas: </h5>
+<h5>Welcome <span class="welcome">{{nama}}</span></h5>
+<h5 class="class-label">Class: </h5>
 <p>{{kelas}}</p> 
 
-<table>
-    <tr>
-        <th>New Ingredients</th>
-    </tr>
-
-    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-    {% for item in items %}
-        <tr>
-            <td>{{item.name}}</td>
-            <td>{{item.amount}}</td>
-            <td>
-                <a href="{% url 'main:increase_item' item.pk %}">
-                    <button>+</button>
-                </a>
-                <a href="{% url 'main:decrease_item' item.pk %}">
-                    <button>-</button>
-                </a>
-            </td>
-            <td>{{item.description}}</td>
-            <td>{{item.category}}</td>
-            <td>
-                <a href="{% url 'main:delete_item' item.pk %}" onclick="return confirm('Are you sure?');">
-                    <button>Delete</button>
-                </a>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-
+<div class="card">
+    <div class="card-header">
+        Adorable Home's Ingredients Collection
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">New Ingredients</h5>
+        <div class="card">
+            <div class="card-body">
+                <table class="ingredient-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>
+                            <a href="{% url 'main:increase_item' item.pk %}">
+                                <button>➕</button>
+                            </a>
+                            <a href="{% url 'main:decrease_item' item.pk %}">
+                                <button>➖</button>
+                            </a>
+                        </td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.category}}</td>
+                        <td>
+                            <a href="{% url 'main:delete_item' item.pk %}" onclick="return confirm('Are you sure?');">
+                                <button>delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        Last time you were logged in: {{ last_login }}
+    </div>
+</div>
 
 <br />
 
-<a href="{% url 'main:create_item' %}">
-    <button>
+<style>
+    .center-align{
+        text-align:center;
+    }
+    /* Customize button colors */
+    .custom-button {
+        background-color: #FF5733; /* Change to your desired color */
+        color: white; /* Text color for the button */
+        padding: 10px 20px; /* Adjust padding as needed */
+        border: none; /* Remove button border if desired */
+        cursor: pointer; /* Add a cursor pointer on hover */
+        text-decoration: none; /* Remove underlines on button text */
+        font-size: 16px; /* Adjust font size as needed */
+        border-radius: 5px; /* Add rounded corners if desired */
+        margin-right: 10px; /* Add margin between buttons */
+    }
+</style>
+<!-- Center-aligned buttons with custom styles -->
+<div class="center-align">
+    <a href="{% url 'main:create_item' %}" class="custom-button">
         Add New Ingredient
-    </button>
-</a>
+    </a>
 
-<h5>Last time you were logged in: {{ last_login }}</h5>
-
-<a href="{% url 'main:logout' %}">
-    <button>
+    <a href="{% url 'main:logout' %}" class="custom-button">
         Logout
-    </button>
-</a>
+    </a>
+</div>
 
 {% endblock content %}

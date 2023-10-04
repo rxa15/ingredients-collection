@@ -4,31 +4,73 @@
     <title>Register Account</title>
 {% endblock meta %}
 
-{% block content %}  
-
-<div class = "login">
+{% block content %}
+<div class="bg-image" style="background-image: url('https://github.com/rxa15/ingredients-collection/blob/main/IMG_2964.jpg?raw=true'); height: 100vh; position: relative;">
     
-    <h1>Register Account</h1>  
+    <!-- Mask overlay using a pseudo-element -->
+    <div class="overlay"></div>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Register"/></td>  
-                </tr>  
-            </table>  
-        </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
-</div>  
-
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="login-box" style="position: relative; z-index: 2;"> <!-- Adjust the z-index here -->
+            <!-- Separate box for "Register Account" text -->
+            <div class="login-text">
+                <h1 class="text-center">Welcome to the Kitchen 👨‍🍳🧑‍🍳</h1>
+                <p class="text-center">Create an account before entering the kitchen please</p>
+            </div>
+                    
+                    <!-- Center the registration form -->
+                    <div class="text-center">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="password2">Confirm Password:</label>
+                                <input type="password" name="password2" id="password2" class="form-control">
+                            </div>
+                            <button class="btn btn-primary btn-block mb-2" type="submit" name="submit">Register</button>
+                        </form>
+                    </div>
+        
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}     
+                
+            <p class="text-center">Already have an account? <a href="{% url 'main:login' %}">Login</a></p>
+        </div>
+    </div>
+</div>
+<style>
+    .overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.621); /* Adjust the color and opacity as needed */
+    }
+    
+    .login-box {
+        background-color: rgba(255, 255, 255, 0.819); /* Adjust the background color and opacity as needed */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .login-text {
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
 {% endblock content %}

@@ -1,19 +1,60 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Add an Ingredient</title>
+{% endblock meta %}
 
 {% block content %}
-<h1>Add New Ingredients</h1>
+<div class="bg-image" style="background-image: url('https://github.com/rxa15/ingredients-collection/blob/main/IMG_2964.jpg?raw=true'); height: 100vh; position: relative;">
+    <!-- Mask overlay using a pseudo-element -->
+    <div class="overlay"></div>
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Add Ingredient"/>
-            </td>
-        </tr>
-    </table>
-</form>
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="form-box" style="position: relative; z-index: 2;">
+            <div class="form-text">
+                <h1 class="text-center">Add an Ingredient 🍽️</h1>
+            </div>
+            
+            <!-- Center the form fields and submit button -->
+            <div class="text-center">
+                <form method="POST">
+                    {% csrf_token %}
+                    <table class="mx-auto"> <!-- Use mx-auto class to center the table -->
+                        {{ form.as_table }}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Add Ingredient" class="btn btn-primary btn-block">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% endblock %}
+<style>
+    .overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.621); /* Adjust the color and opacity as needed */
+    }
+    
+    .form-box {
+        background-color: rgba(255, 255, 255, 0.819); /* Adjust the background color and opacity as needed */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .form-text {
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
+</style>
+{% endblock content %}
