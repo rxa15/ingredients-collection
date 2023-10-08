@@ -1,4 +1,6 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
+<details>
+<summary>Tugas 5</summary>
 # Tugas 5 PBP
 # Manfaat dari Setiap HTML *Element Selector* dan Waktu Kegunaannya
 1. **`Element Selector`** (tidak diawali # atau .)
@@ -36,7 +38,35 @@ p{
 }
 ```
 * *Selector* `header` akan mengatur elemen yang memiliki ID `header` sehingga *header* di HTML tersebut akan memiliki warna latar belakang putih, *centered text align*, dan warna teks hitam.
-------------------------------------------------------------------------------------------------------------------------------------------
+# Penjelasan Tentang HTML5 Tag yang Saya Ketahui
+- `<!-- -->`: digunakan untuk memberikan komentar pada HTML
+- `<body>`: digunakan untuk menandakan bagian yang menjadi badan dari dokumen HTML
+- `<button>`: digunakan untuk menandakan tombol yang dapat kita pencet
+- `<div>`: digunakan untuk menamdakan suatu bagian dari badan dokumen HTML
+- `<head>`: digunakan untuk memberikan informasi terkait suatu dokumen HTML
+- `<title>`: digunakan untuk menandakan judul (*title*) dari suatu dokumen HTML
+# Perbedaan *Margin* dan *Padding*
+* *Margin* adalah area di sekitar batas (*border*) suatu elemen pada HTML. Oleh karena itu, *margin* mengatur area di luar suatu elemen. Sementara itu, *padding* adalah area yang berada di antara batas suatu elemen dengan isi (*content*) dari suatu elemen pada HTML. Oleh karena itu, *padding* mengatur area di dalam elemen. Berikut adalah ilustrasi perbedaan dari *margin* dan *padding*:
+![Ilustrasi Margin dan Padding](https://cdn-images-1.medium.com/max/1200/1*xOn6MsNhUcju7Did367ssQ.jpeg)
+# Perbedaan antara *Framework* CSS Tailwind dan Bootstrap dan Kapan Waktu Penggunaannya?
+Tailwind dan Bootstrap adalah *framework* CSS yang banyak digunakan oleh pengembang aplikasi web. Perbedaan dari kedua *framework* tersebut adalah Bootstrap telah menyediakan komponen-komponen CSS seperti *template* dan *class* yang siap pakai sehingga pengembang tidak perlu mengatur kode untuk membuat komponen-komponen *basic* di aplikasi web mereka. Sementara itu, Tailwind tidak menyediakan komponen yang siap pakai. Pengembang pun harus merancang dan membangun desain mereka dengan menggunakan *utility classes* yang telah disediakan. Keunggulan dari perbedaan ini adalah pengembang dapat menghemat waktu saat membangun aplikasi web mereka dengan menggunakan Bootstrap karena komponen-komponen umum telah tersedia. Hal ini juga membuat Bootstrap unggul dalam kecepatan implementasi dibandingkan Tailwind. Akan tetapi, Tailwind tentu saja lebih unggul dalam hal kustomisasi dibandingkan dengan Bootstrap. Oleh karena itu, dapat kita simpulkan bahwa Bootstrap berfokus pada pengembangan komponen CSS secara umum dan menyeluruh untuk aplikasi web, sementara Tailwind berfokus pada tampilan *User Interface* (UI) yang fleksibel. 
+
+Waktu yang baik untuk menggunakan Bootstrap adalah ketika pengembang akan membuat sebuah aplikasi web dalam jangka waktu yang pendek, tetapi tetap ingin menghasilkan aplikasi web yang fungsional dan praktis. Sementara itu, ketika pengguna akan membuat sebuah aplikasi web dalam jangka waktu yang panjang dan ingin menghasilkan aplikasi web dengan desain yang kompleks (hasil kustomisasi), ia dapat menggunakan Tailwind. 
+
+# Penjelasan Implementasi Checklist
+## Kustomisasi Desain pada *Template* HTML yang Telah Dibuat pada Tugas 4 dengan Menggunakan CSS atau CSS *Framework*
+### Checklist 1: Kustomisasi Halaman Login
+Saya mendesain halaman `login` di aplikasi web saya dengan menggunakan Bootstrap. Pada *file* `login.html`, saya mengatur *background image* tampilan aplikasi web saya di *class* `bg-image` dengan gambar dapur di *game* Adorable Home (dapurnya desain sendiri hehe 😎). Kemudian saya membuat *class* `overlay` agar konten (*form login*) pada halaman login dapat terlihat dengan jelas dan tidak tertutup oleh *background image* yang cerah (*making content more readable against light background*). Selanjutnya, saya membuat *class* yang berisi konten dari *form login*. *Class* tersebut mengatur posisi *form* agar berada di bagian tengah layar dan z-index yang mengatur urutan *stack* dari suatu elemen (*form login*) agar tidak tertumpuk.
+### Checklist 2 & 3: Kustomisasi Halaman Register dan Tambah Inventori
+Halaman `register`, `login`, dan `tambah inventori` memiliki tampilan yang serupa. Perbedaannya hanya terletak pada teks pada *form register* dan *add an ingredient*.
+## Checklist 4: Kustomisasi Halaman Daftar Inventori dengan Menggunakan `Card`
+Desain halaman daftar inventori berbeda dengan halaman login, register, dan tambah inventori. Pada halaman daftar inventori, saya tidak menambahkan *background image* karena saya ingin pengguna dapat berfokus pada daftar bahan makanan yang telah mereka daftarkan di aplikasi web saya. Saya menggunakan class `card` untuk mendesain halaman daftar inventori. Mengapa? Karena saya ingin daftar inventori bahan makanan terletak pada satu bagian yang sama (tidak terpisah-pisah dalam sebuah *container*) dengan tetap menyesuaikan ukuran layar. Selain itu, saya ingin *container*nya juga fleksibel dan *extensible*. Pengaturan `Card` yang saya gunakan dapat dilihat pada berkas `main.html` di *folder* `main`.
+
+------------------------------------------------------------------------------------------------------------------------------------------ 
+</details>
+
+<details>
+<summary>Tugas 4</summary>
 # Tugas 4 PBP
 # Django `UserCreationForm` serta Kelebihan dan Kekurangannya
 * Django memiliki sebuah * build-in user-authentication system*, yaitu sebuah sistem yang dapat melakukan verifikasi terhadap identitas pengguna sehingga pengguna yang terverifikasi akan mendapatkan akses untuk menjalankan suatu kegiatan tertentu yang diperbolehkan di sistem tersebut. *User-authentication system* pada Django mengatur hal-hal yang berkaitan dengan *user accounts* (akun pengguna), *groups* (memberikan izin untuk lebih dari satu pengguna), *permissions* (memberikan akses kepada pengguna terkait kegiatan apa saja yang diperbolehkan), dan *cookie-based user sessions* (menggunakan *cookies* untuk mengenali *session* yang unik pada suatu web tertentu). Salah satu *modules* Django yang berkaitan dengan sistem tersebut adalah `UserCreationForm`.
@@ -117,6 +147,10 @@ di `main.html` dan
 pada `views.py`
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</details>
+
+<details>
+<summary>Tugas 3</summary>
 # Tugas 3 PBP
 # Penjelasan Implementasi Checklist
 ## Checklist 1: Membuat Input `form` 
@@ -257,7 +291,11 @@ JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena fo
 ### JSON by ID
 ![Screenshot Hasil Akses JSON by ID 5](json_by_id_Laras.jpeg)
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</details>
+
+<details>
+<summary>Tugas 2</summary>
 # Tugas 2 PBP
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
 Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Home, yang merupakan sebuah *game* simulasi.
@@ -447,3 +485,4 @@ Kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual
 ## Perbedaan MVC, MVT, dan MVVM
 * Perbedaan ketiga konsep desain tersebut terletak pada jembatan penghubung antar komponen-komponennya. Pada MVC, `Controller` berperan sebagai penghubung `Model` dan `View`, sedangkan `Template` pada MVT dan `Viewmodel` pada MVVM menjadi "Controller"-nya.
 * Selain itu, pada MVC dan MVT `Model` dan `View` terhubung secara langsung. Namun, pada MVVM mereka harus melalui `Viewmodel` karena `Model` dan `View`nya tidak terhubung secara langsung.
+</details>
