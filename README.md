@@ -1,6 +1,5 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
-<details>
-<summary>Tugas 5</summary>
+
 # Tugas 5 PBP
 # Manfaat dari Setiap HTML *Element Selector* dan Waktu Kegunaannya
 1. **`Element Selector`** (tidak diawali # atau .)
@@ -63,10 +62,6 @@ Halaman `register`, `login`, dan `tambah inventori` memiliki tampilan yang serup
 Desain halaman daftar inventori berbeda dengan halaman login, register, dan tambah inventori. Pada halaman daftar inventori, saya tidak menambahkan *background image* karena saya ingin pengguna dapat berfokus pada daftar bahan makanan yang telah mereka daftarkan di aplikasi web saya. Saya menggunakan class `card` untuk mendesain halaman daftar inventori. Mengapa? Karena saya ingin daftar inventori bahan makanan terletak pada satu bagian yang sama (tidak terpisah-pisah dalam sebuah *container*) dengan tetap menyesuaikan ukuran layar. Selain itu, saya ingin *container*nya juga fleksibel dan *extensible*. Pengaturan `Card` yang saya gunakan dapat dilihat pada berkas `main.html` di *folder* `main`.
 
 ------------------------------------------------------------------------------------------------------------------------------------------ 
-</details>
-
-<details>
-<summary>Tugas 4</summary>
 # Tugas 4 PBP
 # Django `UserCreationForm` serta Kelebihan dan Kekurangannya
 * Django memiliki sebuah * build-in user-authentication system*, yaitu sebuah sistem yang dapat melakukan verifikasi terhadap identitas pengguna sehingga pengguna yang terverifikasi akan mendapatkan akses untuk menjalankan suatu kegiatan tertentu yang diperbolehkan di sistem tersebut. *User-authentication system* pada Django mengatur hal-hal yang berkaitan dengan *user accounts* (akun pengguna), *groups* (memberikan izin untuk lebih dari satu pengguna), *permissions* (memberikan akses kepada pengguna terkait kegiatan apa saja yang diperbolehkan), dan *cookie-based user sessions* (menggunakan *cookies* untuk mengenali *session* yang unik pada suatu web tertentu). Salah satu *modules* Django yang berkaitan dengan sistem tersebut adalah `UserCreationForm`.
@@ -147,10 +142,7 @@ di `main.html` dan
 pada `views.py`
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-</details>
 
-<details>
-<summary>Tugas 3</summary>
 # Tugas 3 PBP
 # Penjelasan Implementasi Checklist
 ## Checklist 1: Membuat Input `form` 
@@ -292,10 +284,7 @@ JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena fo
 ![Screenshot Hasil Akses JSON by ID 5](json_by_id_Laras.jpeg)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-</details>
 
-<details>
-<summary>Tugas 2</summary>
 # Tugas 2 PBP
 # Penjelasan tentang Aplikasi Pengelolaan yang Saya Buat
 Aplikasi pengelolaan yang saya buat terinspirasi dari *mobile game* Adorable Home, yang merupakan sebuah *game* simulasi.
@@ -485,4 +474,3 @@ Kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual
 ## Perbedaan MVC, MVT, dan MVVM
 * Perbedaan ketiga konsep desain tersebut terletak pada jembatan penghubung antar komponen-komponennya. Pada MVC, `Controller` berperan sebagai penghubung `Model` dan `View`, sedangkan `Template` pada MVT dan `Viewmodel` pada MVVM menjadi "Controller"-nya.
 * Selain itu, pada MVC dan MVT `Model` dan `View` terhubung secara langsung. Namun, pada MVVM mereka harus melalui `Viewmodel` karena `Model` dan `View`nya tidak terhubung secara langsung.
-</details>
