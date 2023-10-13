@@ -1,35 +1,57 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-    <head>
-        <title>Adorable Home's Ingredients Collection Page</title>
-        <style>
-            h1 {
-                text-align: center;
-            }
-            .welcome {
-                font-weight: normal;
-            }
-            .class-label {
-                font-weight: bold;
-            }
-            .ingredient-table {
-                width: 100%;
-                border-collapse: collapse; /* For cell spacing */
-            }
+<head>
+    <title>Adorable Home's Ingredients Collection Page</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .welcome {
+            font-weight: normal;
+        }
+        .class-label {
+            font-weight: bold;
+        }
+        .ingredient-table {
+            width: 100%;
+            border-collapse: collapse; /* For cell spacing */
+        }
 
-            .ingredient-table th,
-            .ingredient-table td {
-                padding: 8px;
-                text-align: center;
-                border: 1px solid rgb(220, 244, 116); /* For cell separation */
-            }
+        .ingredient-table th,
+        .ingredient-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid rgb(220, 244, 116); /* For cell separation */
+        }
 
-            .ingredient-table th {
-                background-color: #1ada87d0; 
-            }
-        </style>
-    </head>
+        .ingredient-table th {
+            background-color: #1ada87d0; 
+        }
+
+        .center-align{
+            text-align:center;
+        }
+
+        /* Customize button colors */
+        .custom-button {
+            background-color: #FF5733; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            cursor: pointer; 
+            text-decoration: none; 
+            font-size: 16px; 
+            border-radius: 5px; 
+            margin-right: 10px; 
+        }
+
+        .add-button{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
 <h1>Ingredients Collection</h1>
 
 <h5>Hey <span class="welcome">{{nama}}</span> welcome to the Kitchen! 👋</h5>
@@ -45,9 +67,11 @@
                 <table class="ingredient-table" id="table">
                     <tr>
                         <th>Name</th>
-                        <th>Category</th>
                         <th>Amount</th>
+                        <th>Add/Reduce</th>
                         <th>Description</th>
+                        <th>Category</th>
+                        <th>Delete</th>
                     </tr>
                     {% for item in items %}
                     <tr>
@@ -84,63 +108,25 @@
     async function getItems(){
         return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
     }
-    async function refreshItems(){
-        document.getElementById("table").innerHTML = ""
-        const items = await getItems()
-        let htmlString = `<tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Description</th>
-        </tr>`
-        items.forEach((item) => {
-            htmlString += `\n<tr>
-            <td>${item.fields.name}</td>
-            <td>${item.fields.category}</td>
-            <td>${item.fields.amount}</td>
-            <td>${item.fields.description}</td>
-        </tr>` 
-        })
-        
-        document.getElementById("table").innerHTML = htmlString
-    }
-    refreshItems()
-
     function addItem() {
-        fetch("{% url 'main:add_item_ajax' %}", {
-            method: "POST",
-            body: new FormData(document.querySelector('#form'))
-        }).then(refreshItems)
+            fetch("{% url 'main:add_item_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#addItemForm'))
+            }).then(refreshItems);
 
-        document.getElementById("form").reset()
-        return false
-    }
-    document.getElementById("button_add").onclick = addItem()
+            document.getElementById("addItemForm").reset();
+            return false;
+        }
+        document.getElementById("button_add").onclick = addItem;
 </script>
 
-
-<style>
-    .center-align{
-        text-align:center;
-    }
-    /* Customize button colors */
-    .custom-button {
-        background-color: #FF5733; 
-        color: white; 
-        padding: 10px 20px; 
-        border: none; 
-        cursor: pointer; 
-        text-decoration: none; 
-        font-size: 16px; 
-        border-radius: 5px; 
-        margin-right: 10px; 
-    }
-</style>
-<!-- Center-aligned buttons with custom styles -->
 <div class="center-align">
+    <div class="button-container">
+        <button type="button" class="btn btn-primary button_add" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Ingredients by AJAX</button>
     <a href="{% url 'main:logout' %}" class="custom-button">
         Logout
     </a>
+    </div>
 </div>
 
 <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
@@ -151,7 +137,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addItemform" onsubmit="return addItem();">
+                <form id="addItemForm" onsubmit="return addItem();">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="itemName" class="col-form-label">Name:</label>
@@ -165,6 +151,7 @@
                             <option value="Meat">Meat</option>
                             <option value="Spices">Spices</option>
                         </select>
+                    </div>
                     <div class="mb-3">
                         <label for="itemAmount" class="col-form-label">Amount:</label>
                         <input type="number" class="form-control" id="itemAmount" name="amount">
@@ -187,6 +174,4 @@
         margin-bottom: 20px
     }
 </style>
-<button type="button" class="btn btn-primary add-button" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Ingredients by AJAX</button>
-
 {% endblock content %}

@@ -1,20 +1,58 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
-
+[Link Deploy]()
 # Tugas 6 PBP
 # Perbedaan antara *Asynchronous Programming* dengan *Synhcronous Programming*
-* Perbedaan antara kedua konsep *programming* tersebut terletak pada cara kerjanya. *Asynchronous programming* bekerja secara independen dan tidak terkait dengan eksekusi lain yang dijalankan. Ketika suatu perintah dieksekusi, perintah lain yang dieksekusi setelahnya tetap dapat berjalan. Pengguna dapat menjalankan banyak *task* secara bersamaan, sehingga dapat disimpulkan bahwa *asynchronous programming* bekerja secara paralel. Sementara itu, *synchronous programming* bekerja secara satu per satu secara sekuensial sesuai dengan urutan suatu perintah harus dijalankan. Ketika suatu perintah dieksekusi, perintah-perintah yang akan dieksekusi setelahnya harus menunggu perintah tersebut selesai dieksekusi. Pengguna hanya dapat menjalankan *one task at a time*, sehingga dapat disimpulkan bahwa *synchronous programming tidak bekerja secara paralel.
+* Perbedaan antara kedua konsep *programming* tersebut terletak pada cara kerjanya. *Asynchronous programming* bekerja secara independen dan tidak terkait dengan eksekusi lain yang dijalankan. Ketika suatu perintah dieksekusi, perintah lain yang dieksekusi setelahnya tetap dapat berjalan. Hal ini memungkinkan program bekerja dalam waktu yang lebih singkat. Pengguna juga dapat menjalankan banyak *task* secara bersamaan, sehingga dapat disimpulkan bahwa *asynchronous programming* bekerja secara paralel. Sementara itu, *synchronous programming* bekerja secara satu per satu secara sekuensial sesuai dengan urutan suatu perintah harus dijalankan. Ketika suatu perintah dieksekusi, perintah-perintah yang akan dieksekusi setelahnya harus menunggu perintah tersebut selesai dieksekusi. Pengguna hanya dapat menjalankan *one task at a time*, sehingga dapat disimpulkan bahwa *synchronous programming tidak bekerja secara paralel. Hal ini membuat alur program lebih mudah dipahami, tetapi dijalankan dalam waktu yang lebih lama dibandingkan dengan *asynchronous programming*.
 # Penjelasan Paradigma *Event-driven Programming* beserta Contohnya di Tugas Ini
+* Paradigma *Event-driven Programming* merujuk pada konsep waktu eksekusi *task* yang ditentukan oleh suatu *event* tertentu. Program dengan *event-driven programming* juga memungkinkan program bekerja secara *asynchronous*. Dalam *event-driven programming*, terdapat *event-listener* dan *event-handler* yang masing-masing bekerja untuk "mendengarkan" kapan suatu *event* akan terjadi dan mengatur respon apa yang harus diberikan ketika *event* tersebut terjadi.
+* Penerapan *event-driven programming* pada tugas ini terletak pada
 # Penjelasan Penerapan *Asynchronous Programming* pada AJAX
-# Perbandingan AJAX dan *Library* jQuery
+AJAX merupakan singkatan dari *Asynchronous* JavaScript And XML, yang berarti bahwa AJAX bekerja secara *asynchronous* (menerapkan *asynchronous programming*). Dengan cara kerja ini, berbagai *event* dapat dijalankan oleh AJAX secara paralel. Cara kerja ini ditandai dengan kata kunci `async`. Selain itu, terdapat juga fungsi `fetch()` yang melakukan proses HTTP GET Request dan Await agar memastikan bahwa *task* yang akan dijalankan di program lainnya tetap dapat berjalan. Ketika sudah terdapat respon yang menandakan bahwa *task* sudah selesai dieksekusi, fungsi-fungsi lain dalam program akan dijalankan.
+# Perbandingan Fetch API dan *Library* jQuery
+| Fetch API| jQuery|
+| -- | -- |
+| Tidak memerlukan *library* tambahan | Memerlukan *library* tambahan yang perlu diunduh |
+| Lebih sering digunakan di aplikasi web modern karena mudah digunakan | *Compatible* untuk semua aplikasi web karena memiliki fitur dan utilitas yang banyak |
+| Memnggunakan *syntax* yang lebih mudah dipahami | Menggunakan *syntax* yang lebih sulit dipahami
+
+Menurut saya, keduanya sama-sama memiliki kekurangan dan kelebihan masing-masing. Penggunaannya tergantung pada pekerjaan yang akan kita lakukan. Misalnya, tugas ini lebih cocok dikerjakan dengan Fetch API karena lebih mudah dimengerti dan *beginner-friendly*. Akan tetapi, untuk projek lain yang lebih besar yang mengharuskan kita membuat sebuah aplikasi web yang *compatible* di semua browser, sebaiknya kita menggunakan *library* jQuery.
 # Penjelasan Implementasi Checklist
-## Checklist 1: Ubahlah Kode *Cards* Data Item agar Dapat Mendukung AJAX GET
-## Checklist 2: Lakukan Pengambilan Task Menggunakan AJAX GET
-## Checklist 3: Buatlah Sebuah Tombol yang Membuka Sebuah Modal dengan *Form* untuk Menambahkan Item
-## Checklist 4: Buatlah Fungsi *view* Baru untuk Menambahkan Item Baru ke Dalam Basis Data
-## Checklist 5: Buatlah *path* `/create-ajax/` yang Mengarah ke Fungsi *view* yang Telah Dibuat
-## Checklist 6: Hubungkan *form* yang Telah Dibuat ke *path* `/create-ajax/`
-## Checklist 7: Lakukan *Refresh* pada Halaman Utama secara Asinkronus untuk Menampilkan Daftar Item Terbaru
-## Checklist 8: Melakukan Perintah `collectstatic`
+## Implementasi AJAX GET
+Saya membuat fungsi `get_item_json` yang dapat mengembalikan data dalam bentuk JSON yang dapat di-*fetch* pada `main.html`.
+```
+def get_item_json(request):
+    data = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', data))
+```
+Saya juga membuat fungsi `add_item_ajax` yang berfungsi untuk menambahkan data yang ditambahkan pengguna melalui AJAX ke basis data. Fungsi ini menggunakan dekorator `@csrf_exempt` untuk memberitahu bahwa fungsi ini tidak memerlukan token CSRF.
+```
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        user = request.user
+        name = request.POST.get("name")
+        category = request.POST.get("category")
+        amount = request.POST.get("amount")
+        description = request.POST.get("amount")
+
+        new_item = Item(user=user, name=name, category=category, amount=amount, description=description)
+        new_item.save()
+        return HttpResponse(b"CREATED", status = 201)
+    return HttpResponseNotFound()
+```
+Setelah itu, saya menambahkan URL *path* dari fungsi-fungsi tersebut di `urls.py`.
+```
+path('get-product/', get_item_json, name='get_item_json'),
+path('create-ajax/', add_item_ajax, name='add_item_ajax'),
+```
+## Implementasi AJAX POST
+Agar pengguna dapat menambahkan bahan makanan baru di *form* dengan AJAX, saya membuat sebuah tombol `Add Ingredient by AJAX`. Saat memencet tombol ini, pengguna dapat menambahkan bahan makanan baru sekaligus melihat perubahan yang terjadi di inventori secara *asynchronous*. Saya juga menambahkan fungsi `addItem()` yang berfungsi untuk melakukan *fetch* dan mengirimkan HTTP Request.
+## Melakukan Perintah `collectstatic`
+Saya menambahkan kode berikut ini pada berkas `settings.py`:
+```
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+Kemudian, perintah `python manage.py collectstatic` saya jalankan di terminal untuk mengumpulkan setiap *static file* di kode saya.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 5 PBP

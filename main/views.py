@@ -43,6 +43,8 @@ def register_account(request):
 
     if request.method == "POST":
         form = UserCreationForm(request.POST)
+        print(request.POST)
+        print(form.errors)
         if form.is_valid():
             form.save()
             messages.success(request, "You've successfully created your account!")
@@ -109,7 +111,7 @@ def delete(request, id):
     return HttpResponseRedirect(reverse('main:ingredients-collection'))
 
 def get_item_json(request):
-    data = Item.objects.all()
+    data = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', data))
 
 # fungsi untuk menambahkan item baru ke basis data dengan AJAX
