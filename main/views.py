@@ -1,16 +1,14 @@
 import datetime
 from django.core import serializers
-from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages  
 from main.forms import ProductForm
-from django.urls import reverse
 from main.models import Item
 
 from django.shortcuts import render
@@ -109,3 +107,22 @@ def delete(request, id):
     item = Item.objects.get(pk=id)
     item.delete()
     return HttpResponseRedirect(reverse('main:ingredients-collection'))
+
+def get_item_json(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize('json', data))
+
+# fungsi untuk menambahkan item baru ke basis data dengan AJAX
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        user = request.user
+        name = request.POST.get("name")
+        category = request.POST.get("category")
+        amount = request.POST.get("amount")
+        description = request.POST.get("amount")
+
+        new_item = Item(user=user, name=name, category=category, amount=amount, description=description)
+        new_item.save()
+        return HttpResponse(b"CREATED", status = 201)
+    return HttpResponseNotFound()

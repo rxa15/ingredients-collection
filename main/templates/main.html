@@ -4,9 +4,6 @@
     <head>
         <title>Adorable Home's Ingredients Collection Page</title>
         <style>
-            body{
-                background-image: url('');
-            }
             h1 {
                 text-align: center;
             }
@@ -33,14 +30,11 @@
             }
         </style>
     </head>
-</div>
 <h1>Ingredients Collection</h1>
 
-<h5>Welcome <span class="welcome">{{nama}}</span></h5>
-<h5 class="class-label">Class: </h5>
-<p>{{kelas}}</p> 
+<h5>Hey <span class="welcome">{{nama}}</span> welcome to the Kitchen! 👋</h5>
 
-<div class="card">
+<div class="card" id="items_container">
     <div class="card-header">
         Adorable Home's Ingredients Collection
     </div>
@@ -48,14 +42,12 @@
         <h5 class="card-title">New Ingredients</h5>
         <div class="card">
             <div class="card-body">
-                <table class="ingredient-table">
+                <table class="ingredient-table" id="table">
                     <tr>
                         <th>Name</th>
-                        <th>Amount</th>
-                        <th>Action</th>
-                        <th>Description</th>
                         <th>Category</th>
-                        <th>Action</th>
+                        <th>Amount</th>
+                        <th>Description</th>
                     </tr>
                     {% for item in items %}
                     <tr>
@@ -88,6 +80,44 @@
 </div>
 
 <br />
+<script>
+    async function getItems(){
+        return fetch("{% url 'main:get_item_json' %}").then((res) => res.json())
+    }
+    async function refreshItems(){
+        document.getElementById("table").innerHTML = ""
+        const items = await getItems()
+        let htmlString = `<tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>`
+        items.forEach((item) => {
+            htmlString += `\n<tr>
+            <td>${item.fields.name}</td>
+            <td>${item.fields.category}</td>
+            <td>${item.fields.amount}</td>
+            <td>${item.fields.description}</td>
+        </tr>` 
+        })
+        
+        document.getElementById("table").innerHTML = htmlString
+    }
+    refreshItems()
+
+    function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addItem()
+</script>
+
 
 <style>
     .center-align{
@@ -108,13 +138,55 @@
 </style>
 <!-- Center-aligned buttons with custom styles -->
 <div class="center-align">
-    <a href="{% url 'main:create_item' %}" class="custom-button">
-        Add New Ingredient
-    </a>
-
     <a href="{% url 'main:logout' %}" class="custom-button">
         Logout
     </a>
 </div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addItemModalLabel">Add New Ingredient</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addItemform" onsubmit="return addItem();">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="itemName" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="itemName" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemCategory" class="col-form-label">Category:</label>
+                        <select class="form-control" id="itemCategory" name="category">
+                            <option value="Fruit">Fruit</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Meat">Meat</option>
+                            <option value="Spices">Spices</option>
+                        </select>
+                    <div class="mb-3">
+                        <label for="itemAmount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="itemAmount" name="amount">
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemDescription" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="itemDescription" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .add-button{
+        margin-bottom: 20px
+    }
+</style>
+<button type="button" class="btn btn-primary add-button" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Ingredients by AJAX</button>
 
 {% endblock content %}

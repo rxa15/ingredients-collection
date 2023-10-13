@@ -1,5 +1,22 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
 
+# Tugas 6 PBP
+# Perbedaan antara *Asynchronous Programming* dengan *Synhcronous Programming*
+* Perbedaan antara kedua konsep *programming* tersebut terletak pada cara kerjanya. *Asynchronous programming* bekerja secara independen dan tidak terkait dengan eksekusi lain yang dijalankan. Ketika suatu perintah dieksekusi, perintah lain yang dieksekusi setelahnya tetap dapat berjalan. Pengguna dapat menjalankan banyak *task* secara bersamaan, sehingga dapat disimpulkan bahwa *asynchronous programming* bekerja secara paralel. Sementara itu, *synchronous programming* bekerja secara satu per satu secara sekuensial sesuai dengan urutan suatu perintah harus dijalankan. Ketika suatu perintah dieksekusi, perintah-perintah yang akan dieksekusi setelahnya harus menunggu perintah tersebut selesai dieksekusi. Pengguna hanya dapat menjalankan *one task at a time*, sehingga dapat disimpulkan bahwa *synchronous programming tidak bekerja secara paralel.
+# Penjelasan Paradigma *Event-driven Programming* beserta Contohnya di Tugas Ini
+# Penjelasan Penerapan *Asynchronous Programming* pada AJAX
+# Perbandingan AJAX dan *Library* jQuery
+# Penjelasan Implementasi Checklist
+## Checklist 1: Ubahlah Kode *Cards* Data Item agar Dapat Mendukung AJAX GET
+## Checklist 2: Lakukan Pengambilan Task Menggunakan AJAX GET
+## Checklist 3: Buatlah Sebuah Tombol yang Membuka Sebuah Modal dengan *Form* untuk Menambahkan Item
+## Checklist 4: Buatlah Fungsi *view* Baru untuk Menambahkan Item Baru ke Dalam Basis Data
+## Checklist 5: Buatlah *path* `/create-ajax/` yang Mengarah ke Fungsi *view* yang Telah Dibuat
+## Checklist 6: Hubungkan *form* yang Telah Dibuat ke *path* `/create-ajax/`
+## Checklist 7: Lakukan *Refresh* pada Halaman Utama secara Asinkronus untuk Menampilkan Daftar Item Terbaru
+## Checklist 8: Melakukan Perintah `collectstatic`
+
+------------------------------------------------------------------------------------------------------------------------------------------
 # Tugas 5 PBP
 # Manfaat dari Setiap HTML *Element Selector* dan Waktu Kegunaannya
 1. **`Element Selector`** (tidak diawali # atau .)
