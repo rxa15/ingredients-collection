@@ -1,4 +1,5 @@
 [Link Adaptable](https://ingredients-collection-app.adaptable.app/main/) tidak bisa diakses karena akun Adaptable saya di-disabled 
+nyoba dulu buat deploy
 [Link Deploy]()
 # Tugas 6 PBP
 # Perbedaan antara *Asynchronous Programming* dengan *Synhcronous Programming*
